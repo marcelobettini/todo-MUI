@@ -1,0 +1,10 @@
+:root {
+  zoom: 2;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
