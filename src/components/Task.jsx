@@ -1,18 +1,24 @@
 import React from "react";
+import { ListItemButton, ListItemText, Typography } from "@mui/material";
 
 function Task({ id, description, isCompleted, onChangeStatus }) {
-  const changeIsCompleted = () => {
-    onChangeStatus(id);
-  };
   return (
-    <article>
-      <span>{id.slice(0, 5)}</span>
-      <span> - </span>
-      <span>{description}</span>
-      <span> - </span>
-      <span>{isCompleted ? "completa" : "pendiente"}</span>
-      <button onClick={changeIsCompleted}>Toggle</button>
-    </article>
+    <ListItemButton onClick={onChangeStatus}>
+      <ListItemText
+        style={{ width: "350px" }}
+        primary={description}
+        secondary={
+          <Typography
+            component="span"
+            sx={{
+              color: isCompleted ? "red" : "green",
+            }}
+          >
+            {isCompleted ? "completa" : "pendiente"}
+          </Typography>
+        }
+      />
+    </ListItemButton>
   );
 }
 
