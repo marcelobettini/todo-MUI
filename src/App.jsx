@@ -6,13 +6,15 @@ import {
   TextField,
   Typography,
   ListItem,
-  Container,
 } from "@mui/material";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Task from "./components/Task";
+import { getTasksFromStorage } from "./services/getTasksFromStorage";
+
 function App() {
-  const [tasks, setTasks] = useState([]);
+  console.log("se monta el componente");
+  const [tasks, setTasks] = useState(getTasksFromStorage());
   const handleAddTask = (e) => {
     e.preventDefault();
     const addTaskForm = new FormData(e.target);
@@ -26,6 +28,7 @@ function App() {
     };
 
     setTasks((prevState) => [...prevState, newTask]);
+
     e.target.reset();
   };
 
@@ -44,6 +47,10 @@ function App() {
 
     setTasks(newState);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
   return (
     <main className="container">
       <header>
